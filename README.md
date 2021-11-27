@@ -1,5 +1,6 @@
 
 # Clean Architecture
+In Clean architecture, the business logic and application model are in the center of the application (the Core). Instead of having the business logic depending on data access or some other infrastructure concern, the dependency is inverted: the infrastructure and implementation details depend on the Application Core. This can be done by defining abstractions or interfaces in the Application Core, which are then implemented by types defined in the Infrastructure layer.
 
 ## Core Project
 The Core project is the center of the Clean Architecture design, and all other project dependencies should point toward it.
@@ -69,3 +70,13 @@ Infrastructure Dependencies must not be in the Shared Kernel project, because al
 - **Logging**
 - **Validators**
 
+
+## References
+-   **Common web application architectures**  
+    [https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
+-   **The Clean Architecture**  
+    [https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
+-   **The Onion Architecture**  
+    [https://jeffreypalermo.com/blog/the-onion-architecture-part-1/](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
+-   **Clean Architecture Solution Template**  
+    [https://github.com/ardalis/cleanarchitecture](https://github.com/ardalis/cleanarchitecture)
