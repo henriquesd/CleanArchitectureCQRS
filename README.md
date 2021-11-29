@@ -3,13 +3,13 @@
 Web API Project using .NET 6, Clean Architecture (Onion Architecture) with CQRS (Command and Query Responsibility Segregation Pattern) and MediatR
 
 ## Technologies
-- .NET 6
-- MediatR
-- Entity Framework 6
+- [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [MediatR](https://github.com/jbogard/MediatR)
+- [Entity Framework 6](https://docs.microsoft.com/en-us/ef/core/)
 - Fluent API
-- AutoMapper
-- Swagger
-- SQL Server
+- [AutoMapper](https://automapper.org/)
+- [Swagger](https://swagger.io/)
+- [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver15)
 
 ## Command and Query Responsibility Segregation (CQRS)
 The Command and Query Responsibility Segregation (CQRS) it’s an architectural pattern where the main focus is to separate the way of reading and writing data. This pattern uses  two separate models:
@@ -32,14 +32,14 @@ The image below illustrates this style of architecture:
 
 
 ## Project Layers Overview
-- **Core Project** - The Core project is the center of the Clean Architecture design, and all other project dependencies should point toward it.
+In this section there is an explanation about the layers in the solution and in which layer each kind of class should be located.
+
+
+### Core Project
+The Core project is the center of the Clean Architecture design, and all other project dependencies should point toward it.
 In the Core Project is where all the information related to the Domain will be. The Core project it's free of dependencies, which means that the other layers depends on the Core project, and not the other way around.
-- **Infrastructure Project** - In the Infrastructure Project is where all the things that communicate with external stuffs are. This project it's the only place in the system that's know something about data access.
-- **Web Project** - The Web Project is the entry point of the application, it is the ASP.NET Core Web project.
-- **SharedKernel Project** - The SharedKernel is inside of this solution only for demonstration purpose, if you need a SharedKernel, the recommendation is to create it separated from your solution. You can use a SharedKernel Project when you need to share code between multiple bounded contexts. This project can hold common types that you want to share between your different apps. They are typically referenced using your Core Project and ideally distributed using Nuget Packages.
 
-
-### What belongs to the Core Project:
+#### What belongs to the Core Project:
 - **Interfaces**
 - **Entities** - Which is all the things in your system that have an id.
 - **Aggregates** - It's a Domain-Driven design Pattern for grouping entities together to give you another encapsulation boundary and make it easier to do persistence with groups of related things. For example, for an Order with all the Order Items you can construct this as an aggregate and when you persist it you store the whole order and fetch the whole order.
@@ -50,10 +50,12 @@ In the Core Project is where all the information related to the Domain will be. 
 - **Event Handlers**
 - **Specifications**
 - **Validators** - Any kind of validators that you need for your domain, using something like Fluent Validation, Enums or Smart Enums (that are classes that sort of act like enums).
-- Custom Guards- Simple validators you do make sure your system is in a consistent state, and you could create your own custom ones that you reuse that apply to your domain model.
+- **Custom Guards** - Simple validators you do make sure your system is in a consistent state, and you could create your own custom ones that you reuse that apply to your domain model.
 
+### Infrastructure Project
+In the Infrastructure Project is where all the things that communicate with external stuffs are. This project it's the only place in the system that's know something about data access.
 
-### What belongs to the Infrastructure Project:
+#### What belongs to the Infrastructure Project:
 - **Repositories**
 - **DbContext classes**
 - **Cached Repositories**
@@ -65,7 +67,10 @@ In the Core Project is where all the information related to the Domain will be. 
 - **Other Services / Interfaces** - Services/Interfaces that don't use the domain model for their parameters and return types. So for example, if you are using some SDK and you are using some Azure type, you don't want to put this in Core because it would have a dependency on Azure in your Core Project, so you would put this interface or any interface that uses those Azure specific types inside of Infrastructure and then put any of those Services in there as well, but you would typically not call them from outside of Infrastructure.
 
 
-### What belongs to the Web Project:
+### Web Project
+The Web Project is the entry point of the application, it is the ASP.NET Core Web project.
+
+#### What belongs to the Web Project:
 - **API Endpoints**
 - **Razor Pages**
 - **Controllers**
@@ -78,8 +83,10 @@ In the Core Project is where all the information related to the Domain will be. 
 - **Other Services** - These are going to be services that have parameters or return types that are made up of these types of things that you see inside the Web project (fo example, view models/dtos/etc).
 - **Interfaces**
 
+### SharedKernel Project
+The SharedKernel is inside of this solution only for demonstration purpose, if you need a SharedKernel, the recommendation is to create it separated from your solution. You can use a SharedKernel Project when you need to share code between multiple bounded contexts. This project can hold common types that you want to share between your different apps. They are typically referenced using your Core Project and ideally distributed using Nuget Packages.
 
-### What belongs to the SharedKernel Project:
+#### What belongs to the SharedKernel Project:
 - **Base Entity**
 - **Base Value Object**
 - **Base Domain Event**
