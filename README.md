@@ -30,6 +30,12 @@ The image below illustrates this style of architecture:
 
 > In this diagram, dependencies flow toward the innermost circle. The Application Core takes its name from its position at the core of this diagram. And you can see on the diagram that the Application Core has no dependencies on other application layers. The application's entities and interfaces are at the very center. Just outside, but still in the Application Core, are domain services, which typically implement interfaces defined in the inner circle. Outside of the Application Core, both the UI and the Infrastructure layers depend on the Application Core, but not on one another (necessarily).
 
+As in the image above, the ``Infrastructure`` layer and the ``User Interface`` layer (also known as the ``Presentation`` or ``Web`` layer), conceptually, are on the same level of the hierarchy.
+
+The centre of this architecture is the Core layer. There are different approaches to how the structure of the layers will be inside the solution, but in all of them, the dependencies always flows toward the ``Core``. 
+The name of the layers can also be different on each approach, for example, the ``Core`` is also named ``Domain``, etc.
+In some approaches, the "Entities" and the "Domain Services" classes are in the same layers (in the ``Core``), and in other approaches, the ``Entities`` are created in the ``Core`` layer, and the ``Domain Services`` are created in another layer.
+
 
 ## Project Layers Overview
 In this section there is an explanation about the layers in the solution and in which layer each kind of class should be located.
@@ -41,9 +47,13 @@ In the Core Project is where all the information related to the Domain will be. 
 
 #### What belongs to the Core Project:
 - **Interfaces**
-- **Entities** - Which is all the things in your system that have an id.
+- **Entities** - Which is all the things in your system that have an Id. Entities are objects that have their own identity, for example, in a system that has many clients objects, each "Client" object has its own identity, which is not defined by its attributes, but by its Id - it's possible to have two clients with the same name, but their Id will be different.
+
+    The Entity can be an anemic entity or can also contain behaviour. This same Entity can also be used by EF Core to generate the tables in the database, but it's recommended to use the Fluent API in order to configure the EF Core properties for this entity, this way you keep your entity clean, without having configuration details for EF Core (for example, EF Core mapping attributes, etc).
+
+    Another approach is that you can have two different types of Entity: one Entity with behaviour in the Core layer, and another Entity in the Infrastructure layer, with properties only, which will be used by EF Core to generate the tables, then you can configure a mapping between these entities.
 - **Aggregates** - It's a Domain-Driven design Pattern for grouping entities together to give you another encapsulation boundary and make it easier to do persistence with groups of related things. For example, for an Order with all the Order Items you can construct this as an aggregate and when you persist it you store the whole order and fetch the whole order.
-- **Value Objects** - Things that don't have an identity and that you can compare just by looking at their properties. For example, the DateTime in .NET.
+- **Value Objects** - Are objects that don't need to have their own identification. A Value Object is defined by its properties/attributes values. For a Value Object, if we have two instances with the same values, doesn't matter which one we are going to use, they are interchangeable.
 - **Domain Services** - Where the business logic lives, and has to do with multiple entities and value objects and how they work with each other. You can try to put as much behaviour into your entities, aggregates and value objects as you can, but sometimes it doesn't belong in one of those, and so you have domain services for that.
 - **Domain Exceptions** - Where custom domain exceptions will be. Instead of relying on a low-level exception like a null reference exception for example (which a developer has to go and debug the system in order to figure out what is the issue), you can throw a domain exception that says something as "Customer not found exception", or "Order doesn't exist exception", or something like this, where it's much more clear what is null, or what is missing, without you having to debug to see what is the problem.
 - **Domain Events**
@@ -117,7 +127,8 @@ The SharedKernel is inside of this solution only for demonstration purpose, if y
     [https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
 -   **MediatR**  
     [https://github.com/jbogard/MediatR](https://github.com/jbogard/MediatR)
-    
+-   **Onion Architecture in ASP.NET Core**  
+    [https://code-maze.com/onion-architecture-in-aspnetcore/](https://code-maze.com/onion-architecture-in-aspnetcore/)
 
 ## Articles
 - [The Command and Query Responsibility Segregation (CQRS) Pattern](https://henriquesd.medium.com/the-command-and-query-responsibility-segregation-cqrs-pattern-16cb7704c809)
