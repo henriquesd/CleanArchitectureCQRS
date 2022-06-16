@@ -1,6 +1,6 @@
 
 # Clean Architecture with CQRS
-Web API Project using .NET 6, Clean Architecture (Onion Architecture) with CQRS (Command and Query Responsibility Segregation Pattern) and MediatR
+Web API Project using .NET 6, Clean Architecture (Onion Architecture) with CQRS (Command and Query Responsibility Segregation Pattern) and MediatR.
 
 ## Technologies
 - [.NET 6](https://dotnet.microsoft.com/download/dotnet/6.0)
@@ -11,18 +11,8 @@ Web API Project using .NET 6, Clean Architecture (Onion Architecture) with CQRS 
 - [Swagger](https://swagger.io/)
 - [SQL Server](https://docs.microsoft.com/en-us/sql/sql-server/?view=sql-server-ver15)
 
-## Command and Query Responsibility Segregation (CQRS)
-The Command and Query Responsibility Segregation (CQRS) it’s an architectural pattern where the main focus is to separate the way of reading and writing data. This pattern uses  two separate models:
-
--   **Commands** — Which are responsible for update data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
--   **Queries** — Which are responsible for reading data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
-
-The image below illustrates a basic implementation of the CQRS Pattern:
-![cqrs-pattern](https://user-images.githubusercontent.com/11948560/143908776-edbbd0ae-7a15-4fb5-b9c0-11947a456fb3.png)
-
-
 ## Clean Architecture
-In Clean architecture, the business logic and application model are in the center of the application (the Core). Instead of having the business logic depending on data access or some other infrastructure concern, the dependency is inverted: the infrastructure and implementation details depend on the Application Core. This can be done by defining abstractions or interfaces in the Application Core, which are then implemented by types defined in the Infrastructure layer.
+The main idea of the Clean Architecture is the separation of concerns, and this goal can be achieved by dividing the software into layers. In the Clean architecture, the business logic and application model are at the center of the application (the Core). Instead of having the business logic depending on data access or some other infrastructure concern, the dependency is inverted: the infrastructure and implementation details depend on the Application Core. This can be done by defining abstractions or interfaces in the Application Core, which are then implemented by types defined in the Infrastructure layer.
 
 The image below illustrates this style of architecture:
 ![onion-architecture](https://user-images.githubusercontent.com/11948560/143908873-37b528a7-b4ef-4143-9bfe-0d91447bc208.png)
@@ -43,7 +33,7 @@ In this section there is an explanation about the layers in the solution and in 
 
 ### Core Project
 The Core project is the center of the Clean Architecture design, and all other project dependencies should point toward it.
-In the Core Project is where all the information related to the Domain will be. The Core project it's free of dependencies, which means that the other layers depends on the Core project, and not the other way around.
+In the Core Project is where all the information related to the Domain will be. The Core project it's free of dependencies, which means that the other layers depend on the Core project, and not the other way around.
 
 #### What belongs to the Core Project:
 - **Interfaces**
@@ -94,7 +84,7 @@ The Web Project is the entry point of the application, it is the ASP.NET Core We
 - **Interfaces**
 
 ### SharedKernel Project
-The SharedKernel is inside of this solution only for demonstration purpose, if you need a SharedKernel, the recommendation is to create it separated from your solution. You can use a SharedKernel Project when you need to share code between multiple bounded contexts. This project can hold common types that you want to share between your different apps. They are typically referenced using your Core Project and ideally distributed using Nuget Packages.
+The SharedKernel is inside of this solution only for demonstration purposes, if you need a SharedKernel, the recommendation is to create it separated from your solution. You can use a SharedKernel Project when you need to share code between multiple bounded contexts. This project can hold common types that you want to share between your different apps. They are typically referenced using your Core Project and ideally distributed using Nuget Packages.
 
 #### What belongs to the SharedKernel Project:
 - **Base Entity**
@@ -110,6 +100,15 @@ The SharedKernel is inside of this solution only for demonstration purpose, if y
 - **Logging**
 - **Validators**
 
+
+## Command and Query Responsibility Segregation (CQRS)
+The Command and Query Responsibility Segregation (CQRS) it’s an architectural pattern where the main focus is to separate the way of reading and writing data. This pattern uses  two separate models:
+
+-   **Commands** — Which are responsible for update data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
+-   **Queries** — Which are responsible for reading data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
+
+The image below illustrates a basic implementation of the CQRS Pattern:
+![cqrs-pattern](https://user-images.githubusercontent.com/11948560/143908776-edbbd0ae-7a15-4fb5-b9c0-11947a456fb3.png)
 
 
 ## References
