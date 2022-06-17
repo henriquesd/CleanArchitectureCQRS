@@ -22,7 +22,7 @@ The image below illustrates this style of architecture:
 
 As in the image above, the ``Infrastructure`` layer and the ``User Interface`` layer (also known as the ``Presentation`` or ``Web`` layer), conceptually, are on the same level of the hierarchy.
 
-The centre of this architecture is the Core layer. There are different approaches to how the structure of the layers will be inside the solution, but in all of them, the dependencies always flows toward the ``Core``. 
+The center of this architecture is the Core layer. There are different approaches to how the structure of the layers will be inside the solution, but in all of them, the dependencies always flow toward the ``Core``. 
 The name of the layers can also be different on each approach, for example, the ``Core`` is also named ``Domain``, etc.
 In some approaches, the "Entities" and the "Domain Services" classes are in the same layers (in the ``Core``), and in other approaches, the ``Entities`` are created in the ``Core`` layer, and the ``Domain Services`` are created in another layer.
 
@@ -53,7 +53,7 @@ In the Core Project is where all the information related to the Domain will be. 
 - **Custom Guards** - Simple validators you do make sure your system is in a consistent state, and you could create your own custom ones that you reuse that apply to your domain model.
 
 ### Infrastructure Project
-In the Infrastructure Project is where all the things that communicate with external stuffs are. This project it's the only place in the system that's know something about data access.
+In the Infrastructure Project is where all the things that communicate with external stuffs are. This project it's the only place in the system that know something about data access.
 
 #### What belongs to the Infrastructure Project:
 - **Repositories**
@@ -104,7 +104,7 @@ The SharedKernel is inside of this solution only for demonstration purposes, if 
 ## Command and Query Responsibility Segregation (CQRS)
 The Command and Query Responsibility Segregation (CQRS) it’s an architectural pattern where the main focus is to separate the way of reading and writing data. This pattern uses  two separate models:
 
--   **Commands** — Which are responsible for update data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
+-   **Commands** — Which are responsible for updating data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
 -   **Queries** — Which are responsible for reading data. Commands represent the intention of changing the state of an entity. They execute operations like Insert, Update, Delete. Commands objects alter state and do not return data.
 
 The image below illustrates a basic implementation of the CQRS Pattern:
@@ -115,7 +115,7 @@ The image below illustrates a basic implementation of the CQRS Pattern:
 -   **Common web application architectures**  
     [https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures](https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures)
 -   **The Clean Architecture**  
-    [https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html)
+    [https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 -   **The Onion Architecture**  
     [https://jeffreypalermo.com/blog/the-onion-architecture-part-1/](https://jeffreypalermo.com/blog/the-onion-architecture-part-1/)
 -   **Clean Architecture with ASP.NET Core 6 - Steve Smith**  
