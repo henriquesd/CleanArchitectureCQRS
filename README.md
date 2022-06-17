@@ -37,7 +37,7 @@ In the Core Project is where all the information related to the Domain will be. 
 
 #### What belongs to the Core Project:
 - **Interfaces**
-- **Entities** - Which is all the things in your system that have an Id. Entities are objects that have their own identity, for example, in a system that has many clients objects, each "Client" object has its own identity, which is not defined by its attributes, but by its Id - it's possible to have two clients with the same name, but their Id will be different.
+- **Entities** - Which are all the things in your system that have an Id. Entities are objects that have their own identity, for example, in a system that has many clients objects, each "Client" object has its own identity, which is not defined by its attributes, but by its Id - it's possible to have two clients with the same name, but their Id will be different.
 
     The Entity can be an anemic entity or can also contain behaviour. This same Entity can also be used by EF Core to generate the tables in the database, but it's recommended to use the Fluent API in order to configure the EF Core properties for this entity, this way you keep your entity clean, without having configuration details for EF Core (for example, EF Core mapping attributes, etc).
 
@@ -53,7 +53,7 @@ In the Core Project is where all the information related to the Domain will be. 
 - **Custom Guards** - Simple validators you do make sure your system is in a consistent state, and you could create your own custom ones that you reuse that apply to your domain model.
 
 ### Infrastructure Project
-In the Infrastructure Project is where all the things that communicate with external stuffs are. This project it's the only place in the system that know something about data access.
+In the Infrastructure Project is where all the things that communicate with external stuffs are. This project is the only place in the system that know something about data access.
 
 #### What belongs to the Infrastructure Project:
 - **Repositories**
@@ -80,7 +80,7 @@ The Web Project is the entry point of the application, it is the ASP.NET Core We
 - **Model Binders**
 - **Tag Helpers**
 - **Composition Root**
-- **Other Services** - These are going to be services that have parameters or return types that are made up of these types of things that you see inside the Web project (fo example, view models/dtos/etc).
+- **Other Services** - These are going to be services that have parameters or return types that are made up of these types of things that you see inside the Web project (for example, view models/dtos/etc).
 - **Interfaces**
 
 ### SharedKernel Project
