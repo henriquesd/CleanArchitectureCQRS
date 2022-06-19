@@ -14,7 +14,8 @@ Web API Project using .NET 6, Clean Architecture (Onion Architecture) with CQRS 
 ## Clean Architecture
 The main idea of the Clean Architecture is the separation of concerns, and this goal can be achieved by dividing the software into layers. In the Clean architecture, the business logic and application model are at the center of the application (the Core). Instead of having the business logic depending on data access or some other infrastructure concern, the dependency is inverted: the infrastructure and implementation details depend on the Application Core. This can be done by defining abstractions or interfaces in the Application Core, which are then implemented by types defined in the Infrastructure layer.
 
-The image below illustrates this style of architecture:
+There are more than one way to implement the Clean Architecture, and one of them is the [Onion Architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/), introduced by Jeffrey Palermo. The image below illustrates this kind of architecture:
+
 ![onion-architecture](https://user-images.githubusercontent.com/11948560/143908873-37b528a7-b4ef-4143-9bfe-0d91447bc208.png)
 *Image source: https://docs.microsoft.com/en-us/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures*
 
@@ -27,9 +28,10 @@ The name of the layers can also be different on each approach, for example, the 
 In some approaches, the "Entities" and the "Domain Services" classes are in the same layers (in the ``Core``), and in other approaches, the ``Entities`` are created in the ``Core`` layer, and the ``Domain Services`` are created in another layer.
 
 
-## Project Layers Overview
+## Solution Overview
+This solution was created based on the Clean Architecture template proposed by Steve Smith, and you can find the code at [ardalis/cleanarchitecture](https://github.com/ardalis/cleanarchitecture) GitHub repository.
+ 
 In this section there is an explanation about the layers in the solution and in which layer each kind of class should be located.
-
 
 ### Core Project
 The Core project is the center of the Clean Architecture design, and all other project dependencies should point toward it.
@@ -79,6 +81,7 @@ The Web Project is the entry point of the application, it is the ASP.NET Core We
 - **Filters**
 - **Model Binders**
 - **Tag Helpers**
+- **Middleware**
 - **Composition Root**
 - **Other Services** - These are going to be services that have parameters or return types that are made up of these types of things that you see inside the Web project (for example, view models/dtos/etc).
 - **Interfaces**
@@ -122,6 +125,8 @@ The image below illustrates a basic implementation of the CQRS Pattern:
     [https://youtu.be/lkmvnjypENw](https://youtu.be/lkmvnjypENw)
 -   **Clean Architecture Solution Template**  
     [https://github.com/ardalis/cleanarchitecture](https://github.com/ardalis/cleanarchitecture)
+-   **Clean Architecture with ASP.NET Core**
+-   [https://ardalis.com/clean-architecture-asp-net-core/](https://ardalis.com/clean-architecture-asp-net-core/)
 -   **CQRS Pattern - Microsoft Documentation**  
     [https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs](https://docs.microsoft.com/en-us/azure/architecture/patterns/cqrs)
 -   **MediatR**  
