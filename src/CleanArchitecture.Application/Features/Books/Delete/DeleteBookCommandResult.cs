@@ -1,12 +1,12 @@
 ﻿using CleanArchitecture.Core.Dtos.Book;
 
-namespace CleanArchitecture.Core.Features.Books.Edit
+namespace CleanArchitecture.Application.Features.Books.Delete
 {
-    public class UpdateBookCommandResult
+    public class DeleteBookCommandResult
     {
         public BookResultDto BookResultDto { get; set; }
 
-        public UpdateBookCommandResult(BookResultDto bookResultDto)
+        public DeleteBookCommandResult(BookResultDto bookResultDto)
         {
             BookResultDto = bookResultDto;
         }

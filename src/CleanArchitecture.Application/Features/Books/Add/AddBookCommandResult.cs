@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Core.Dtos.Book;
 
-namespace CleanArchitecture.Core.Features.Books.Add
+namespace CleanArchitecture.Application.Features.Books.Add
 {
     public class AddBookCommandResult
     {

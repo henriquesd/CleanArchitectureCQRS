@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
+using CleanArchitecture.Application.Features.Books.Read.GetAllBooks;
+using CleanArchitecture.Application.Features.Books.Read.GetBookById;
 using CleanArchitecture.Core.Dtos.Book;
-using CleanArchitecture.Core.Features.Books.Read.GetAllBooks;
-using CleanArchitecture.Core.Features.Books.Read.GetBookById;
 using CleanArchitecture.Core.Interfaces;
 using MediatR;
 
-namespace CleanArchitecture.Core.Features.Books
+namespace CleanArchitecture.Application.Features.Books
 {
     public class BooksQueryHandler :
          IRequestHandler<GetAllBooksQuery, GetAllBooksQueryResult>,

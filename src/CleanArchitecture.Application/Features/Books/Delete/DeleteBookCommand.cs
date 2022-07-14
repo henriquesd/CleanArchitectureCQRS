@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CleanArchitecture.Core.Features.Books.Delete
+namespace CleanArchitecture.Application.Features.Books.Delete
 {
     public class DeleteBookCommand : IRequest<DeleteBookCommandResult>
     {

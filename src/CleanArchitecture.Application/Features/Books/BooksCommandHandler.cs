@@ -1,32 +1,32 @@
 ﻿using AutoMapper;
+using CleanArchitecture.Application.Features.Books.Add;
+using CleanArchitecture.Application.Features.Books.Delete;
+using CleanArchitecture.Application.Features.Books.Edit;
 using CleanArchitecture.Core.Dtos.Book;
 using CleanArchitecture.Core.Entities;
-using CleanArchitecture.Core.Features.Books.Add;
-using CleanArchitecture.Core.Features.Books.Delete;
-using CleanArchitecture.Core.Features.Books.Edit;
 using CleanArchitecture.Core.Interfaces;
 using MediatR;
 
-namespace CleanArchitecture.Core.Features.Books
+namespace CleanArchitecture.Application.Features.Books
 {
     public class BooksCommandHandler : IRequestHandler<AddBookCommand, AddBookCommandResult>,
         IRequestHandler<UpdateBookCommand, UpdateBookCommandResult>,
         IRequestHandler<DeleteBookCommand, DeleteBookCommandResult>
     {
-        private IBookRepository _repository;
+        private IBookService _service;
         private IMapper _mapper;
 
-        public BooksCommandHandler(IBookRepository repository, IMapper mapper)
+        public BooksCommandHandler(IBookService service, IMapper mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
+            _service = service ?? throw new ArgumentNullException(nameof(service));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<AddBookCommandResult> Handle(AddBookCommand request, CancellationToken cancellationToken)
         {
             var bookToAdd = _mapper.Map<Book>(request.BookAddDto);
-            await _repository.Add(bookToAdd);
-            var bookToReturn = _mapper.Map<BookResultDto>(bookToAdd);
+            var book = await _service.Add(bookToAdd);
+            var bookToReturn = _mapper.Map<BookResultDto>(book);
 
             return new AddBookCommandResult(bookToReturn);
         }
@@ -34,7 +34,7 @@ namespace CleanArchitecture.Core.Features.Books
         public async Task<UpdateBookCommandResult> Handle(UpdateBookCommand request, CancellationToken cancellationToken)
         {
             var bookToUpdate = _mapper.Map<Book>(request.BookEditDto);
-            await _repository.Update(bookToUpdate);
+            var book = await _service.Update(bookToUpdate);
             var bookToReturn = _mapper.Map<BookResultDto>(bookToUpdate);
 
             return new UpdateBookCommandResult(bookToReturn);
@@ -42,8 +42,10 @@ namespace CleanArchitecture.Core.Features.Books
 
         public async Task<DeleteBookCommandResult> Handle(DeleteBookCommand request, CancellationToken cancellationToken)
         {
-            var bookToDelete = await _repository.GetById(request.BookId);
-            await _repository.Remove(bookToDelete);
+            var bookToDelete = await _service.GetById(request.BookId);
+            if (bookToDelete == null) return null;
+
+            await _service.Remove(bookToDelete);
             var bookToReturn = _mapper.Map<BookResultDto>(bookToDelete);
 
             return new DeleteBookCommandResult(bookToReturn);

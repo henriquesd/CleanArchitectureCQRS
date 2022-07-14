@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace CleanArchitecture.Core.Features.Books.Read.GetBookById
+namespace CleanArchitecture.Application.Features.Books.Read.GetBookById
 {
     public class GetBookByIdQuery : IRequest<GetBookByIdQueryResult>
     {

@@ -29,8 +29,6 @@ In some approaches, the "Entities" and the "Domain Services" classes are in the 
 
 
 ## Solution Overview
-This solution was created based on the Clean Architecture template proposed by Steve Smith, and you can find the code at [ardalis/cleanarchitecture](https://github.com/ardalis/cleanarchitecture) GitHub repository.
- 
 In this section there is an explanation about the layers in the solution and in which layer each kind of class should be located.
 
 ### Core Project
@@ -54,6 +52,13 @@ In the Core Project is where all the information related to the Domain will be. 
 - **Validators** - Any kind of validators that you need for your domain, using something like Fluent Validation, Enums or Smart Enums (that are classes that sort of act like enums).
 - **Custom Guards** - Simple validators you do make sure your system is in a consistent state, and you could create your own custom ones that you reuse that apply to your domain model.
 
+### Application Project
+The Application project mediates between the Web and Domain Layers.
+
+#### What belongs to the Application Project:
+- **Command/Query classes**
+- **CommandHandler and QueryHandler**
+
 ### Infrastructure Project
 In the Infrastructure Project is where all the things that communicate with external stuffs are. This project is the only place in the system that know something about data access.
 
@@ -67,7 +72,6 @@ In the Infrastructure Project is where all the things that communicate with exte
 - **Emailing / SMS implementations**
 - **System Clock**
 - **Other Services / Interfaces** - Services/Interfaces that don't use the domain model for their parameters and return types. So for example, if you are using some SDK and you are using some Azure type, you don't want to put this in Core because it would have a dependency on Azure in your Core Project, so you would put this interface or any interface that uses those Azure specific types inside of Infrastructure and then put any of those Services in there as well, but you would typically not call them from outside of Infrastructure.
-
 
 ### Web Project
 The Web Project is the entry point of the application, it is the ASP.NET Core Web project.

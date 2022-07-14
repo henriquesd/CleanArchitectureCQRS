@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Core.Dtos.Book;
 using MediatR;
 
-namespace CleanArchitecture.Core.Features.Books.Edit
+namespace CleanArchitecture.Application.Features.Books.Edit
 {
     public class UpdateBookCommand : IRequest<UpdateBookCommandResult>
     {

@@ -1,10 +1,11 @@
-﻿using CleanArchitecture.Core.Features.Books;
-using CleanArchitecture.Core.Features.Books.Add;
-using CleanArchitecture.Core.Features.Books.Delete;
-using CleanArchitecture.Core.Features.Books.Edit;
-using CleanArchitecture.Core.Features.Books.Read.GetAllBooks;
-using CleanArchitecture.Core.Features.Books.Read.GetBookById;
+﻿using CleanArchitecture.Application.Features.Books;
+using CleanArchitecture.Application.Features.Books.Add;
+using CleanArchitecture.Application.Features.Books.Delete;
+using CleanArchitecture.Application.Features.Books.Edit;
+using CleanArchitecture.Application.Features.Books.Read.GetAllBooks;
+using CleanArchitecture.Application.Features.Books.Read.GetBookById;
 using CleanArchitecture.Core.Interfaces;
+using CleanArchitecture.Core.Services;
 using CleanArchitecture.Infrastructure.Context;
 using CleanArchitecture.Infrastructure.Repositories;
 using MediatR;
@@ -16,6 +17,8 @@ namespace CleanArchitecture.Web.Configuration
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             services.AddScoped<CleanArchitectureDbContext>();
+
+            services.AddScoped<IBookService, BookService>();
 
             services.AddScoped<IBookRepository, BookRepository>();
 

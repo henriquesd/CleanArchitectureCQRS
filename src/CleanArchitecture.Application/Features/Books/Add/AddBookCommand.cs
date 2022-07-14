@@ -1,7 +1,7 @@
 ﻿using CleanArchitecture.Core.Dtos.Book;
 using MediatR;
 
-namespace CleanArchitecture.Core.Features.Books.Add
+namespace CleanArchitecture.Application.Features.Books.Add
 {
     public class AddBookCommand : IRequest<AddBookCommandResult>
     {

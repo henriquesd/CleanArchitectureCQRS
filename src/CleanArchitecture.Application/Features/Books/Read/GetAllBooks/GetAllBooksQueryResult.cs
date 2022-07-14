@@ -1,6 +1,6 @@
 ﻿using CleanArchitecture.Core.Dtos.Book;
 
-namespace CleanArchitecture.Core.Features.Books.Read.GetAllBooks
+namespace CleanArchitecture.Application.Features.Books.Read.GetAllBooks
 {
     public class GetAllBooksQueryResult
     {
